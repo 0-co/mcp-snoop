@@ -1,12 +1,12 @@
-# mcp-trace
+# mcp-snoop
 
 **Transparent stdio interceptor for MCP JSON-RPC traffic.**
 
 Like `strace`, but for the Model Context Protocol. Wrap any MCP server and see every message in real time — tool calls, responses, errors. Zero dependencies.
 
 ```
-$ mcp-trace -- python3 my_server.py
-mcp-trace intercepting: python3 my_server.py
+$ mcp-snoop -- python3 my_server.py
+mcp-snoop intercepting: python3 my_server.py
 [03:14:22.847] →SERVER #1 initialize claude-desktop v1.0
 [03:14:22.912] ←CLIENT #1 → server: my-server v0.1.0
 [03:14:22.913] →SERVER notifications/initialized
@@ -15,35 +15,35 @@ mcp-trace intercepting: python3 my_server.py
 [03:14:23.201] →SERVER #3 call search_files(path="/tmp", pattern="*.py")
 [03:14:23.847] ←CLIENT #3 → text: "['server.py', 'handler.py']"
 
-mcp-trace: 7 messages intercepted
+mcp-snoop: 7 messages intercepted
 ```
 
 ## Install
 
 ```bash
-pip install mcp-trace
+pip install mcp-snoop
 ```
 
 Or run without installing:
 
 ```bash
-uvx mcp-trace -- python3 my_server.py
+uvx mcp-snoop -- python3 my_server.py
 ```
 
 ## Usage
 
 ```bash
 # Basic — logs all messages to stderr
-mcp-trace -- python3 my_server.py
+mcp-snoop -- python3 my_server.py
 
 # Verbose — print full JSON for each message
-mcp-trace --verbose -- node server.js
+mcp-snoop --verbose -- node server.js
 
 # Save trace to file
-mcp-trace --output trace.log -- uvx my-mcp-server
+mcp-snoop --output trace.log -- uvx my-mcp-server
 
 # No color (for CI/log files)
-mcp-trace --no-color -- python3 server.py
+mcp-snoop --no-color -- python3 server.py
 ```
 
 ## What you see
@@ -60,17 +60,17 @@ With `--verbose`, the full JSON follows.
 
 You're building an MCP server. Your agent keeps calling the wrong tool. Something's returning garbage. The MCP Inspector requires a browser. You want to script against the logs.
 
-`mcp-trace` gives you the raw protocol traffic, right in your terminal.
+`mcp-snoop` gives you the raw protocol traffic, right in your terminal.
 
 ## Use in Claude Desktop / cline / any MCP client
 
-Replace your server command with `mcp-trace -- <your command>`:
+Replace your server command with `mcp-snoop -- <your command>`:
 
 ```json
 {
   "mcpServers": {
     "my-server": {
-      "command": "mcp-trace",
+      "command": "mcp-snoop",
       "args": ["--output", "/tmp/trace.log", "--", "python3", "my_server.py"]
     }
   }
@@ -86,7 +86,7 @@ All traffic between the client and your server is now logged to `/tmp/trace.log`
 | [agent-friend](https://github.com/0-co/agent-friend) | Grades MCP schema quality (A+ to F) |
 | [mcp-patch](https://github.com/0-co/mcp-patch) | AST security scanner for MCP servers |
 | [mcp-pytest](https://github.com/0-co/mcp-test) | pytest integration for testing MCP servers |
-| **mcp-trace** | Stdio interceptor — debug live protocol traffic |
+| **mcp-snoop** | Stdio interceptor — debug live protocol traffic |
 
 ## License
 
