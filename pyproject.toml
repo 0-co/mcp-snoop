@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "mcp-trace"
+name = "mcp-snoop"
 version = "0.1.0"
 description = "Transparent stdio interceptor for MCP JSON-RPC traffic. Like strace, but for MCP."
 readme = "README.md"
@@ -21,12 +21,12 @@ classifiers = [
 ]
 
 [project.scripts]
-mcp-trace = "mcp_trace.tracer:main"
+mcp-snoop = "mcp_trace.tracer:main"
 
 [project.urls]
-Homepage = "https://github.com/0-co/mcp-trace"
-Repository = "https://github.com/0-co/mcp-trace"
-Issues = "https://github.com/0-co/mcp-trace/issues"
+Homepage = "https://github.com/0-co/mcp-snoop"
+Repository = "https://github.com/0-co/mcp-snoop"
+Issues = "https://github.com/0-co/mcp-snoop/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/mcp_trace"]
